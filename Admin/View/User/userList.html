@@ -1,0 +1,78 @@
+<extend name="Layout:layout"/>
+<block name="main_content">
+    <!--标题开始-->
+    <title>用户列表</title>
+    <div class="page-heading">
+        <h3>user/list</h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">主页</a>
+            </li>
+            <li class="active">用户列表</li>
+        </ul>
+    </div>
+    <!--标题结束-->
+
+    <!--body开始-->
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        General Table
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:;"></a>
+                            <a class="fa fa-times" href="javascript:;"></a>
+                         </span>
+                    </header>
+                    <div class="panel-body">
+                        <table class="table  table-hover general-table">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>头像</th>
+                                <th>用户名</th>
+                                <th>性别</th>
+                                <th>最后登录时间</th>
+                                <th>Email</th>
+                                <th>权限</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td>1</td>
+                                <td><img src="__PUBLIC__/admin/images/user_default_pic.jpg" style="width: 25px;height: 25px">
+                                </td>
+                                <td>admin</td>
+                                <td>男</td>
+                                <td>2016-07-04</td>
+                                <td>15827260277@163.com</td>
+                                <td>超级管理员</td>
+                                <td><span class="label label-success label-mini">正常</span></td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-xs">查看</button>
+                                    <button type="button" class="btn btn-info btn-xs">编辑</button>
+                                    <button type="button" class="btn btn-warning btn-xs">删除</button>
+                                </td>
+                                <!--<td>-->
+                                    <!--<div class="progress progress-striped progress-xs">-->
+                                        <!--<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 70%">-->
+                                            <!--<span class="sr-only">70% Complete (success)</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</td>-->
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!--body结束-->
+</block>

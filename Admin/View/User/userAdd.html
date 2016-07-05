@@ -1,0 +1,147 @@
+<extend name="Layout:layout"/>
+<block name="main_content">
+    <!--标题开始-->
+    <div class="page-heading">
+        <h3>user/list</h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">主页</a>
+            </li>
+            <li class="active">用户添加</li>
+        </ul>
+    </div>
+    <!--标题结束-->
+
+    <!--msg开始-->
+    <!--<div id="msg"></div>-->
+    <div class="alert alert-block alert-danger fade in" id="msg" style="display: none">
+        <button type="button" class="close close-sm" data-dismiss="alert">
+            <i class="fa fa-times"></i>
+        </button>
+        <strong>警告!</strong>&nbsp;&nbsp;&nbsp;<span></span>
+    </div>
+
+    <!--<div class="alert alert-success fade in">-->
+        <!--<button data-dismiss="alert" class="close close-sm" type="button">-->
+            <!--<i class="fa fa-times"></i>-->
+        <!--</button>-->
+        <!--<strong>Well done!</strong> You successfully read this important alert message.-->
+    <!--</div>-->
+    <!--msg结束-->
+
+    <!--body开始-->
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Form Elements
+                    </header>
+                    <div class="panel-body">
+                        <!--表单开始-->
+                        <div class="form-horizontal adminex-form" method="post">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">用户名</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="" name="username" id="username">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">密码</label>
+                                <div class="col-sm-4">
+                                    <input type="password" class="form-control" placeholder="" name="password" id="password">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">确认密码</label>
+                                <div class="col-sm-4">
+                                    <input type="password" class="form-control" placeholder="" name="repassword" id="repassword">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">Email</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="" name="email" id="email">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">性别</label>
+                                <div class="col-lg-2">
+                                    <select class="form-control m-bot15" name="sex" id="sex">
+                                        <option value="1">男</option>
+                                        <option value="0">女</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">权限</label>
+                                <div class="col-lg-2">
+                                    <select class="form-control m-bot15" name="auth" id="auth">
+                                        <option value="0">超级管理员</option>
+                                        <option value="1">普通管理员</option>
+                                        <option value="2">用户</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label col-lg-2" for="inputSuccess"></label>
+                                <div class="col-lg-2">
+                                    <button class="btn btn-primary btn-lg" type="submit" id="submit" onclick="sublimt_verify()">添加</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--表单结束-->
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+    <!--body结束-->
+    <script type="text/javascript">
+
+        function sublimt_verify(){
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var repassword = $('#repassword').val();
+            var email = $('#email').val();
+            var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+//            var sex = $("input[name = 'sex']").val();
+//            var auth = $("input[name = 'auth']").val();
+            var sex = $('#sex').val();
+            var auth = $('#auth').val();
+            alert(auth);
+//            if(username == ''){
+//                $('#msg').show();
+//                $('#msg span').html('用户名不能为空');
+//                $('#msg').fadeOut(3000);
+//            }else if(password == ''){
+//                $('#msg').show();
+//                $('#msg span').html('密码不能为空');
+//                $('#msg').fadeOut(3000);
+//            }else if(password !== repassword){
+//                $('#msg ').show();
+//                $('#msg span').html('两次密码输入不一致');
+//                $('#msg').fadeOut(3000);
+//            }else if(email == ''){
+//                $('#msg').show();
+//                $('#msg span').html('邮箱不能为空');
+//                $('#msg').fadeOut(3000);
+//            }else if(!email.match(reg)){
+//                $('#msg').show();
+//                $('#msg span').html('邮箱格式不正确');
+//                $('#msg').fadeOut(3000);
+//            }else{
+//                alert('插入ajax');
+//            }
+        }
+    </script>
+</block>

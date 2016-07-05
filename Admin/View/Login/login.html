@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>Login</title>
+
+    <link href="__PUBLIC__/admin/css/style.css" rel="stylesheet">
+    <link href="__PUBLIC__/admin/css/style-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="__PUBLIC__/admin/js/html5shiv.js"></script>
+    <script src="__PUBLIC__/admin/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="login-body">
+
+<div class="container">
+
+    <form class="form-signin" action="#">
+        <div class="form-signin-heading text-center">
+            <!-- <h1 class="sign-title">Sign In</h1> -->
+            <img src="__PUBLIC__/admin/images/login-logo.png" alt=""/>
+        </div>
+        <div class="login-wrap">
+            <input type="text" class="form-control" placeholder="用户名" autofocus id="username">
+            <input type="password" class="form-control" placeholder="密码" id="password">
+
+            <button class="btn btn-lg btn-login btn-block" type="submit" id="submit">
+                <!-- <i class="fa fa-check"></i> -->
+                登录
+            </button>
+
+            <!-- <div class="registration">
+                Not a member yet?
+                <a class="" href="#">
+                    Signup
+                </a>
+            </div> -->
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me" name="remember"> 记住我
+                <span class="pull-right">
+                    <a data-toggle="modal" href="#"> 忘记密码?</a>
+
+                </span>
+            </label>
+            <!-- msg -->
+            <div class="alert alert-block alert-danger fade in hidden" id="msg">
+                <button type="button" class="close close-sm" data-dismiss="alert">
+                    <i class="fa fa-times"></i>
+                </button>
+                <strong>123</strong>
+            </div>
+           <!--  <div class="alert alert-block alert-danger fade in">
+                Not a member yet?
+        </div> -->
+
+        <!-- Modal -->
+        <!-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Forgot Password ?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Enter your e-mail address below to reset your password.</p>
+                        <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                        <button class="btn btn-primary" type="button">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- modal -->
+
+    </form>
+
+</div>
+
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__PUBLIC__/admin/js/jquery-1.10.2.min.js"></script>
+<script src="__PUBLIC__/admin/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/admin/js/modernizr.min.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    
+    $('#submit').click(function(){
+        // alert('123');
+        
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var check = $("input[name=remember]").is(':checked');
+
+        var check = 0;
+
+        if(username == '' || password == ''){
+            $('#msg').show();
+            // $('#msg strong').val('123');
+        }
+        // var uname = $('#uname').val();
+        // var pass  = $('#pass').val();
+        // var check = $("input[name=remember]").is(':checked');
+        // var remember = 0;
+        // if(check){
+        //     remember = 1;
+        // }
+        
+        // if(uname == '' || uname == null){
+        
+        //     $('#uname').parents('.formrow').addClass('focus');
+        //     return false;
+        // }
+        
+        // if(pass == '' || pass == null){
+        
+        //     $('#pass').parents('.formrow').addClass('focus');
+        //     return false;
+        // }
+        
+        // $.ajax({
+        //     url:"__CONTROLLER__/doLogin",
+        //     type:"post",
+        //     dataType:"json",
+        //     data:{uname:uname,pass:pass,remember:remember},
+        //     success:function(data ){
+
+        //         if( data.ret == 1 ){
+                
+        //             location.href = '/Index/index';
+        //         }else{
+                
+        //             alert(data.msg);
+        //         }
+        //     }
+        // });
+    
+    });
+
+});
+</script>
+
+</body>
+</html>
