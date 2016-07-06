@@ -14,19 +14,19 @@
 
     <!--msg开始-->
     <!--<div id="msg"></div>-->
-    <div class="alert alert-block alert-danger fade in" id="msg" style="display: none">
+    <div class="alert alert-block alert-danger fade in" id="badmsg" style="display: none">
         <button type="button" class="close close-sm" data-dismiss="alert">
             <i class="fa fa-times"></i>
         </button>
         <strong>警告!</strong>&nbsp;&nbsp;&nbsp;<span></span>
     </div>
 
-    <!--<div class="alert alert-success fade in">-->
-        <!--<button data-dismiss="alert" class="close close-sm" type="button">-->
-            <!--<i class="fa fa-times"></i>-->
-        <!--</button>-->
-        <!--<strong>Well done!</strong> You successfully read this important alert message.-->
-    <!--</div>-->
+    <div class="alert alert-success fade in" id="goodmsg" style = "display: none">
+        <button data-dismiss="alert" class="close close-sm" type="button">
+            <i class="fa fa-times"></i>
+        </button>
+        <strong>消息!</strong>&nbsp;&nbsp;&nbsp;<span></span>
+    </div>
     <!--msg结束-->
 
     <!--body开始-->
@@ -118,30 +118,55 @@
 //            var auth = $("input[name = 'auth']").val();
             var sex = $('#sex').val();
             var auth = $('#auth').val();
-            alert(auth);
-//            if(username == ''){
-//                $('#msg').show();
-//                $('#msg span').html('用户名不能为空');
-//                $('#msg').fadeOut(3000);
-//            }else if(password == ''){
-//                $('#msg').show();
-//                $('#msg span').html('密码不能为空');
-//                $('#msg').fadeOut(3000);
-//            }else if(password !== repassword){
-//                $('#msg ').show();
-//                $('#msg span').html('两次密码输入不一致');
-//                $('#msg').fadeOut(3000);
-//            }else if(email == ''){
-//                $('#msg').show();
-//                $('#msg span').html('邮箱不能为空');
-//                $('#msg').fadeOut(3000);
-//            }else if(!email.match(reg)){
-//                $('#msg').show();
-//                $('#msg span').html('邮箱格式不正确');
-//                $('#msg').fadeOut(3000);
-//            }else{
-//                alert('插入ajax');
-//            }
+            if(username == ''){
+                $('#badmsg').show();
+                $('#badmsg span').html('用户名不能为空');
+                $('#badmsg').fadeOut(3000);
+            }else if(password == ''){
+                $('#badmsg').show();
+                $('#badmsg span').html('密码不能为空');
+                $('#badmsg').fadeOut(3000);
+            }else if(password !== repassword){
+                $('#badmsg ').show();
+                $('#badmsg span').html('两次密码输入不一致');
+                $('#badmsg').fadeOut(3000);
+            }else if(email == ''){
+                $('#badmsg').show();
+                $('#badmsg span').html('邮箱不能为空');
+                $('#badmsg').fadeOut(3000);
+            }else if(!email.match(reg)){
+                $('#badmsg').show();
+                $('#badmsg span').html('邮箱格式不正确');
+                $('#badmsg').fadeOut(3000);
+            }else{
+                $.ajax({
+                    type: "post",
+                    url: "__APP__/Admin/User/userDoAdd",
+                    dataType: 'json',
+                    data: {
+                        username:username,
+                        password:password,
+                        email:email,
+                        sex:sex,
+                        auth:auth
+                    },
+                    success: function(data){
+                        if(data == "1"){
+                            $('#badmsg').show();
+                            $('#badmsg span').html('用户已存在');
+                            $('#badmsg').fadeOut(3000);
+                        }else if(data == "2"){
+                            $('#badmsg').show();
+                            $('#badmsg span').html('添加失败');
+                            $('#badmsg').fadeOut(3000);
+                        }else if(data == "3"){
+                            $('#goodmsg').show();
+                            $('#goodmsg span').html('添加成功');
+                            $('#goodmsg').fadeOut(3000);
+                        }
+                    }
+                });
+            }
         }
     </script>
 </block>

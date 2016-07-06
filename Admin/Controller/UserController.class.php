@@ -24,36 +24,45 @@ class UserController extends Controller {
         $random = new Random();
         $userid = $random->random('9')."-".$random->random('5')."-".$random->random('4')."-".$random->random('5').'-'.uniqid();
 //        $userPic = U('Public/admin/images/user_default_pic.jpg');
-        $userPic = '/index.php/Public/admin/images/user_default_pic.jpg';
-//        获取post
-        $username = I('post.username');
-        $password = md5(I('post.password'));
-//        $repassword = I('post.repassword');
-        $email = I('post.email');
-        $sex = I('post.sex');
-        $auth = I('post.auth');
-//        创建时间
-        $create_time = date('Y-m-d H:i:s',time());
-        $lost_logining = $create_time;
+
+        $userPic = '/index.php/Public/admin/images/user_default_pic.jpg';   // 默认头像地址
+        $username = I('post.username');             // 获取用户名
+        $password = I('post.password');        // 获取密码
+        $email = I('post.email');                   // 获取Email
+        $sex = I('post.sex');                       // 获取性别
+        $auth = I('post.auth');                     // 获取权限
+        $create_time = date('Y-m-d H:i:s',time());  // 创建时间
+        $lost_logining = $create_time;              // 默认最后登录
+
+
 
 //        创建模型
         $userModel = D('pi_user');
-        $data['user_id'] = $userid;
-        $data['user_name'] = $username;
-        $data['password'] = $password;
-        $data['user_pic'] = $userPic;
-        $data['user_email'] = $email;
-        $data['user_sex'] = $sex;
-        $data['user_auth'] = $auth;
-        $data['user_cretae_time'] = $create_time;
-        $data['lost_logining'] = $lost_logining;
-//        $res = $userModel -> data($data) ->add();
-        if($res){
-            $this->success('添加成功','userList');
-        }else{
-            $this->error('添加失败','userAdd');
-        }
+        $repeat = $userModel->field('user_name')->where("user_name = '$username'")->find();
 
+        if($repeat){
+            $this->ajaxReturn("1");
+        }else{
+//            赋值
+            $userData['user_id'] = $userid;
+            $userData['user_name'] = trim($username);
+            $userData['password'] = md5($password);
+            $userData['user_pic'] = $userPic;
+            $userData['user_email'] = $email;
+            $userData['user_sex'] = $sex;
+            $userData['user_auth'] = $auth;
+            $userData['user_cretae_time'] = $create_time;
+            $userData['lost_logining'] = $lost_logining;
+
+            $res = $userModel -> data($userData) ->add();
+            if ($res){
+                // 成功后返回客户端新增的用户ID，并返回提示信息和操作状态
+                $this->ajaxReturn("3");
+            }else{
+                // 错误后返回错误的操作状态和提示信息
+                $this->ajaxReturn("2");
+            }
+        }
 
     }
 
