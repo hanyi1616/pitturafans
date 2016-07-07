@@ -3,8 +3,8 @@ namespace Admin\Controller;
 use Think\Controller;
 class LayoutController extends Controller {
     public function layout(){
-//        $this->redirect('Login/login');
-//        echo "admin/layout";
+        $userInfo = session('userInfo');
+        $this->assign('username',$userInfo['user_name']);
         $this->display();
     }
 }

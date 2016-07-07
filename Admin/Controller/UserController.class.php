@@ -41,7 +41,7 @@ class UserController extends Controller {
         $repeat = $userModel->field('user_name')->where("user_name = '$username'")->find();
 
         if($repeat){
-            $this->ajaxReturn("1");
+            $this->ajaxReturn("1");     //用户不存在
         }else{
 //            赋值
             $userData['user_id'] = $userid;
@@ -56,11 +56,9 @@ class UserController extends Controller {
 
             $res = $userModel -> data($userData) ->add();
             if ($res){
-                // 成功后返回客户端新增的用户ID，并返回提示信息和操作状态
-                $this->ajaxReturn("3");
+                $this->ajaxReturn("3");         // 添加成功
             }else{
-                // 错误后返回错误的操作状态和提示信息
-                $this->ajaxReturn("2");
+                $this->ajaxReturn("2");         // 添加失败
             }
         }
 

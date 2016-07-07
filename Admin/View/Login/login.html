@@ -28,11 +28,22 @@
             <!-- <h1 class="sign-title">Sign In</h1> -->
             <img src="__PUBLIC__/admin/images/login-logo.png" alt=""/>
         </div>
+
         <div class="login-wrap">
+            <!-- msg开始 -->
+            <div class="alert alert-block alert-danger fade in" id="badmsg" style="display: none">
+                <button type="button" class="close close-sm" data-dismiss="alert">
+                    <i class="fa fa-times"></i>
+                </button>
+                <strong>警告!</strong>&nbsp;&nbsp;&nbsp;<span></span>
+            </div>
+            <!-- msg结束 -->
+
             <input type="text" class="form-control" placeholder="用户名" autofocus id="username">
             <input type="password" class="form-control" placeholder="密码" id="password">
-
-            <button class="btn btn-lg btn-login btn-block" type="submit" id="submit">
+            <input type="text" class="form-control" placeholder="验证码" autofocus id="code">
+            <img src="{:U('Admin/Login/Verify_login')}" onClick="this.src=this.src+'?'+Math.random()"/>
+            <button class="btn btn-lg btn-login btn-block" type="submit" id="submit" onclick="login_verify()">
                 <!-- <i class="fa fa-check"></i> -->
                 登录
             </button>
@@ -50,13 +61,7 @@
 
                 </span>
             </label>
-            <!-- msg -->
-            <div class="alert alert-block alert-danger fade in hidden" id="msg">
-                <button type="button" class="close close-sm" data-dismiss="alert">
-                    <i class="fa fa-times"></i>
-                </button>
-                <strong>123</strong>
-            </div>
+
            <!--  <div class="alert alert-block alert-danger fade in">
                 Not a member yet?
         </div> -->
@@ -98,61 +103,64 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function(){
-    
-    $('#submit').click(function(){
-        // alert('123');
-        
+    function login_verify(){
         var username = $('#username').val();
         var password = $('#password').val();
+        var code = $('#code').val();
         var check = $("input[name=remember]").is(':checked');
-
-        var check = 0;
-
-        if(username == '' || password == ''){
-            $('#msg').show();
-            // $('#msg strong').val('123');
+        var remember = 0;
+        if(check){
+            remember = 1;
         }
-        // var uname = $('#uname').val();
-        // var pass  = $('#pass').val();
-        // var check = $("input[name=remember]").is(':checked');
-        // var remember = 0;
-        // if(check){
-        //     remember = 1;
-        // }
-        
-        // if(uname == '' || uname == null){
-        
-        //     $('#uname').parents('.formrow').addClass('focus');
-        //     return false;
-        // }
-        
-        // if(pass == '' || pass == null){
-        
-        //     $('#pass').parents('.formrow').addClass('focus');
-        //     return false;
-        // }
-        
-        // $.ajax({
-        //     url:"__CONTROLLER__/doLogin",
-        //     type:"post",
-        //     dataType:"json",
-        //     data:{uname:uname,pass:pass,remember:remember},
-        //     success:function(data ){
 
-        //         if( data.ret == 1 ){
-                
-        //             location.href = '/Index/index';
-        //         }else{
-                
-        //             alert(data.msg);
-        //         }
-        //     }
-        // });
-    
-    });
-
-});
+        if(username == '' || username == null){
+            $('#badmsg').show();
+            $('#badmsg span').html('用户名不能为空');
+            $('#badmsg').fadeOut(3000);
+        }else if(password == '' || password == null){
+            $('#badmsg').show();
+            $('#badmsg span').html('密码不能为空');
+            $('#badmsg').fadeOut(3000);
+        }else {
+            $.ajax({
+                type: "post",
+                url: "__APP__/Admin/Login/doLogin",
+                dataType: 'json',
+                data: {
+                    username:username,
+                    password:password,
+                    code:code,
+                    remember:remember
+                },
+                success: function(data){
+                   if(data == '1'){
+                       $('#badmsg').show();
+                       $('#badmsg span').html('请输入登录信息');
+                       $('#badmsg').fadeOut(3000);
+                   }else if(data == '2'){
+                       $('#badmsg').show();
+                       $('#badmsg span').html('验证码错误');
+                       $('#badmsg').fadeOut(3000);
+//                       location.href = '/index.php/Admin/Login/login';
+                   }else if(data == '3'){
+                       $('#badmsg').show();
+                       $('#badmsg span').html('该用户不存在');
+                       $('#badmsg').fadeOut(3000);
+                   }else if(data == '4'){
+                       $('#badmsg').show();
+                       $('#badmsg span').html('密码错误');
+                       $('#badmsg').fadeOut(3000);
+                   }else if(data == '5'){
+                       $('#badmsg').show();
+                       $('#badmsg span').html('权限不足');
+                       $('#badmsg').fadeOut(3000);
+                   }else if(data == '6'){
+                       location.href = '/index.php/Admin/Index/index';
+                   }
+                }
+            });
+        }
+    }
 </script>
 
 </body>
