@@ -7,7 +7,6 @@ class LoginController extends Controller {
     }
 
 
-
     public function doLogin(){
         $username = I('post.username');
         $password = md5(I('post.password'));

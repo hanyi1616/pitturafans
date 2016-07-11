@@ -11,6 +11,12 @@ use Admin\Common\Random;
 use Think\Controller;
 class UserController extends Controller {
     public function userList(){
+        $userModel = D('pi_user');
+        $userdata = $userModel->field('user_id,user_name,user_pic,user_sex,user_email,lost_logining,user_status,user_auth')
+            ->order('lost_logining desc')
+            ->select();
+//        var_dump($userdata);
+        $this->assign('user',$userdata);
         $this->display();
     }
 
@@ -25,7 +31,7 @@ class UserController extends Controller {
         $userid = $random->random('9')."-".$random->random('5')."-".$random->random('4')."-".$random->random('5').'-'.uniqid();
 //        $userPic = U('Public/admin/images/user_default_pic.jpg');
 
-        $userPic = '/index.php/Public/admin/images/user_default_pic.jpg';   // 默认头像地址
+        $userPic = 'admin/images/user_default_pic.jpg';   // 默认头像地址
         $username = I('post.username');             // 获取用户名
         $password = I('post.password');        // 获取密码
         $email = I('post.email');                   // 获取Email

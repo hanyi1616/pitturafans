@@ -42,16 +42,24 @@
                             </thead>
                             <tbody>
 
+
+                            <foreach name="user" item="vo" >
                             <tr>
-                                <td>1</td>
-                                <td><img src="__PUBLIC__/admin/images/user_default_pic.jpg" style="width: 25px;height: 25px">
+                                <td>{$vo.user_id}</td>
+                                <td><img src="__PUBLIC__/{$vo.user_pic}" style="width: 25px;height: 25px">
                                 </td>
-                                <td>admin</td>
-                                <td>男</td>
-                                <td>2016-07-04</td>
-                                <td>15827260277@163.com</td>
-                                <td>超级管理员</td>
-                                <td><span class="label label-success label-mini">正常</span></td>
+                                <td>{$vo.user_name}</td>
+                                <td><if condition="$vo.user_sex eq 1 ">男<else />女</if></td>
+                                <td>{$vo.lost_logining}</td>
+                                <td>{$vo.user_email}</td>
+                                <td>
+                                    <if condition="$vo.user_auth eq 0 "><span class="label label-warning label-mini">超级管理员</span><elseif condition="$vo.user_auth eq 1"/><span class="label label-success label-mini">管理员</span><else /><span class="label label-default label-mini">用户</span></if>
+                                    <!--<span class="label label-default label-mini">禁用</span>-->
+                                </td>
+                                <td>
+                                    <if condition="$vo.user_status eq 1 "><span class="label label-danger label-mini">禁用</span><else /><span class="label label-success label-mini">正常</span></if>
+                                    <!--<span class="label label-success label-mini">{$vo.user_status}</span>-->
+                                </td>
                                 <td>
                                     <button type="button" class="btn btn-success btn-xs">查看</button>
                                     <button type="button" class="btn btn-info btn-xs">编辑</button>
@@ -65,7 +73,7 @@
                                     <!--</div>-->
                                 <!--</td>-->
                             </tr>
-
+                            </foreach>
 
                             </tbody>
                         </table>
@@ -74,5 +82,8 @@
             </div>
         </div>
     </div>
+    <script>
+
+    </script>
     <!--body结束-->
 </block>
