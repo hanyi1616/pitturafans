@@ -58,7 +58,7 @@ class UserController extends Controller {
             $userData['user_sex'] = $sex;
             $userData['user_auth'] = $auth;
             $userData['user_cretae_time'] = $create_time;
-            $userData['lost_logining'] = $lost_login               ing;
+            $userData['lost_logining'] = $lost_logining;
 
             $res = $userModel -> data($userData) ->add();
             if ($res){
